@@ -1,7 +1,7 @@
-chromoter
-============
+Chromoter
+=========
 
-This is a minimal image running an X server with openbox on the docker container, and making it available through Google Chrome Remote Desktop.
+This is a Debian slim image running an X server with xfce4 and sharing the desktop through Google Chrome Remote Desktop.
 
 ## Use Cases
 
@@ -12,17 +12,24 @@ This is a minimal image running an X server with openbox on the docker container
 3. Multi-user environments that need isolation and privacy.
 
 ## How to use
+
+### Generate a Google Chrome Remote Desktop Code
+- Go to https://remotedesktop.google.com/headless
+- Select "Set up computer through Command Line"
+- Authenticate with a Google account (Gmail or your corporate account if you use Google for email)
+- Authorize Google Remote Access
+- You should get a message that looks like
 ```
-docker run -td -p 6080:6080 fernandosanchez/chromoter
+/opt/google/chrome-remote-desktop/start-host --code="4/XXXXX_BIG_CODE_HERE_XXXXX" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=
+```
+- Copy the entire "Big Code" including the "4/CODE_HERE"
+- Run from Command Line:
+
+```
+export CODE=[PASTE_YOUR_CODE_HERE]
+docker run -td -p 443:443 -p 5222:5222 fernandosanchez/chromoter
 ```
 
-For access within lan / localhost : visit http://localhost:6080 or http://privateip:6080
-if you are running it in a local docker host or lan ip . click connect. You are good to go.
-
-
-## This is a minimal Image
-
-Applications menu is available right-clicking anywhere on the desktop.
-This comes only with Firefox & Geany text editor installed.
-apt-get is available to install additional software.
+- Wait until the instance boots, then visit:
+https://YOUR_HOSTS_PUBLIC_IP
 
