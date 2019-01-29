@@ -13,6 +13,12 @@ This is a Debian slim image running an X server with xfce4 and sharing the deskt
 
 ## How to use
 
+### Ensure required traffic is allowed through your firewall. 
+Permit:
+- outbound UDP traffic
+- inbound UDP responses
+- traffic on TCP ports 443 (HTTPS) and 5222 (XMPP)
+
 ### Generate a Google Chrome Remote Desktop Code
 - Go to https://remotedesktop.google.com/headless
 - Select "Set up computer through Command Line"
