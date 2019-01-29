@@ -33,9 +33,22 @@ Permit:
 
 ```
 export CODE=[PASTE_YOUR_CODE_HERE]
-docker run -td -p 443:443 -p 5222:5222 fernandosanchez/chromoter
+export USER=[USERNAME_TO_BE_CREATED]
+export PASSWD=[PASSWORD_FOR_THE_USERNAME_ABOVE]
+docker run -ti -p 443:443 -p 5222:5222 -e CODE=$CODE -e USER=$USER -e PASSWD=$PASSWD fernandosanchez/chromoter
 ```
 
-- Wait until the instance boots, then visit:
+- Wait until the instance boots, and follow the prompts in the instance logs to authorize it as in:
+```
+Enter a name for this computer:
+Enter a PIN of at least six digits:
+Enter the same PIN again:
+```
+- An authorization URL will be provided as in:
+```
+Authorization URL for Production services:
+https://accounts.google.com/o/oauth2/auth?scope=https://www.googleapis.com/auth/chromoting+https://www.googleapis.com/auth/googletalk+https://www.googleapis.com/auth/userinfo.email+&redirect_uri=https://chromoting-oauth.talkgadget.google.com/talkgadget/oauth/chrome-remote-desktop/[CROPPED]
+```
+- Follow the link provided to authorize through Google, then visit:
 https://YOUR_HOSTS_PUBLIC_IP
 
