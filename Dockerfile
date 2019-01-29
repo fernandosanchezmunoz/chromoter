@@ -13,8 +13,11 @@ ENV NAME=$NAME
 #this image needs the Chrome remote desktop "code=4/xxxxxxxxxxxxxxxxxxxxxxxx"
 #as an environment variable. To generate it, go here BEFORE running this image:
 #https://remotedesktop.google.com/headless
-ARG CODE
-ENV REMOTE_DESKTOP_CODE=$CODE
+ENV CODE=""
+
+#unprivileged user name
+ENV USER="chromoter"
+ENV PASSWD="changeme"
 
 #install dependencies
 RUN apt-get update -y &&                              \
@@ -42,9 +45,9 @@ RUN apt-get autoclean &&            \
     apt-get autoremove &&           \
     rm -rf /var/lib/apt/lists/*
 
-CMD ["/opt/google/chrome-remote-desktop/start-host",                        \
-    "--code=${REMOTE_DESKTOP_CODE}",                                        \
-    "--redirect-url='https://remotedesktop.google.com/_/oauthredirect'",    \
-    "--name=${NAME}"
+ADD startup.sh .
+
+ENTRYPOINT ["./startup.sh"]
+#ENTRYPOINT ["su", "-", "${USER}", "-c", "opt/google/chrome-remote-desktop/start-host", "--code=${CODE}", "--redirect-url=https://remotedesktop.google.com/_/oauthredirect", "--name=${NAME}"]
 
 EXPOSE 443 5222
