@@ -47,4 +47,4 @@ CMD ["/opt/google/chrome-remote-desktop/start-host",                        \
     "--redirect-url='https://remotedesktop.google.com/_/oauthredirect'",    \
     "--name=${NAME}"
 
-EXPOSE 443 5522
+EXPOSE 443 5222
