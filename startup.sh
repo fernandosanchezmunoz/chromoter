@@ -3,12 +3,12 @@
 useradd -ms /bin/bash ${USER}
 echo ${USER}":"${PASSWD}|chpasswd
 su - ${USER} -c \
-'
-echo "test
-123456
-123456" | \
+"echo '${NAME}
+${PIN}
+${PIN}
+' | \
 /opt/google/chrome-remote-desktop/start-host		                \
 --code=${CODE}		                     	                	    \
---redirect-url="https://remotedesktop.google.com/_/oauthredirect"	\
+--redirect-url=https://remotedesktop.google.com/_/oauthredirect	    \
 --name=${NAME}                                                   	\
-'
+"
